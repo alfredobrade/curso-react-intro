@@ -11,7 +11,10 @@ function AppUI ({
     setSearchValue,
     searchedTodos,
     completeTodo,
-    deleteTodo
+    deleteTodo,
+
+    loading,
+    error
 })
 {
 
