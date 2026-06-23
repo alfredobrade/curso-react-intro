@@ -9,19 +9,20 @@ const defaultTodos = [
   { text: 'Llorar con la Llorona', completed: false },
   { text: 'LALALALALA', completed: false },
 ];
+localStorage.setItem('TODOS_v1', JSON.stringify(defaultTodos));
 
 
 function App() {
 
-  const [todos, saveTodos] = useLocalStorage('TODOS_v1', []);
+  const { item, saveItem, loading, error } = useLocalStorage('TODOS_v1', []);
 
   const [searchValue, setSearchValue] = React.useState('');
   console.log(searchValue);
 
-  const completedTodos = todos.filter(todo => !!todo.completed).length;
-  const totalTodos = todos.length;
+  const completedTodos = item.filter(todo => !!todo.completed).length;
+  const totalTodos = item.length;
 
-  const searchedTodos = todos.filter(todo => todo.text.toLowerCase()
+  const searchedTodos = item.filter(todo => todo.text.toLowerCase()
     .includes(
       searchValue.toLowerCase()
     )
@@ -32,19 +33,19 @@ function App() {
 
 
   const completeTodo = (text) => {
-    const newTodos = [...todos];
+    const newTodos = [...item];
     const index = newTodos.findIndex((todo) => todo.text === text);
     // newTodos.find(todo => todo.text === text).completed = true;
     newTodos[index].completed = true;
-    saveTodos(newTodos);
+    saveItem(newTodos);
   };
 
   const deleteTodo = (text) => {
-    const newTodos = [...todos];
+    const newTodos = [...item];
     const index = newTodos.findIndex((todo) => todo.text === text);
     // newTodos.find(todo => todo.text === text).completed = true;
     newTodos.splice(index, 1);
-    saveTodos(newTodos);
+    saveItem(newTodos);
   };
 
   return (
@@ -56,6 +57,9 @@ function App() {
       searchedTodos={searchedTodos}
       completeTodo={completeTodo}
       deleteTodo={deleteTodo}
+
+      loading={loading}
+      error={error}
 
     />
   )
