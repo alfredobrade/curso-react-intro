@@ -1,0 +1,59 @@
+.TodoForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.TodoForm label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.TodoForm-textarea {
+    width: 100%;
+    height: 96px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    resize: none;
+    box-sizing: border-box;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.TodoForm-textarea:focus {
+    border-color: #7b61ff;
+}
+
+.TodoForm-buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.TodoForm-button {
+    padding: 8px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.TodoForm-button:hover {
+    opacity: 0.85;
+}
+
+.TodoForm-button--cancel {
+    background-color: #e0e0e0;
+    color: #444;
+}
+
+.TodoForm-button--add {
+    background-color: #7b61ff;
+    color: white;
+}

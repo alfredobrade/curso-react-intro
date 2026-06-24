@@ -5,6 +5,7 @@ import { TodoItem } from '../TodoItem';
 import { TodoLoading } from '../TodoLoading';
 import { TodoError } from '../TodoError';
 import { CreateTodoButton } from '../CreateTodoButton';
+import { TodoForm } from '../TodoForm';
 import { Modal } from '../Modal';
 
 import { TodoContext } from '../TodoContext';
@@ -53,7 +54,7 @@ function AppUI() {
               <CreateTodoButton setOpenModal={setOpenModal} />
               {openModal && (
                 <Modal >
-                  <p>CREAR TODO</p>
+                  <TodoForm />
                 </Modal >
               )
               }

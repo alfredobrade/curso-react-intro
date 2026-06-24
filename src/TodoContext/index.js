@@ -20,7 +20,14 @@ const [ openModal, setOpenModal ] = React.useState(false);
     ); // delegate lambda version like C#
     // const searchedTodos = todos.filter( (todo) => { return todo.text.includes(searchValue) } ); //arrow function version
 
-
+    const addTodo = (text) => {
+        const newTodos = [...item];
+        newTodos.push({
+            completed: false,
+            text
+        });
+        saveItem(newTodos);
+    }
 
 
     const completeTodo = (text) => {
@@ -51,6 +58,7 @@ const [ openModal, setOpenModal ] = React.useState(false);
             searchedTodos,
             completeTodo,
             deleteTodo,
+            addTodo,
             openModal,
             setOpenModal
         }}>
