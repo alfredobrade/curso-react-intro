@@ -5,6 +5,7 @@ import { TodoItem } from '../TodoItem';
 import { TodoLoading } from '../TodoLoading';
 import { TodoError } from '../TodoError';
 import { CreateTodoButton } from '../CreateTodoButton';
+import { Modal } from '../Modal';
 
 import { TodoContext } from '../TodoContext';
 
@@ -44,7 +45,22 @@ function AppUI() {
         }
       </TodoContext.Consumer>
 
-      <CreateTodoButton />
+
+      <TodoContext.Consumer>
+        {
+          ({ openModal, setOpenModal }) => (
+            <>
+              <CreateTodoButton setOpenModal={setOpenModal} />
+              {openModal && (
+                <Modal >
+                  <p>CREAR TODO</p>
+                </Modal >
+              )
+              }
+            </>
+          )
+        }
+      </TodoContext.Consumer>
     </>
   );
 

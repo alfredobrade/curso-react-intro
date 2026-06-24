@@ -1,10 +1,10 @@
 import './CreateTodoButton.css';
 
-function CreateTodoButton() {
+function CreateTodoButton({ setOpenModal }) {
   return (
     <button 
     className="CreateTodoButton"
-    onClick={() => {}}
+    onClick={() => setOpenModal(true)}
     >+</button>
   );
 }
