@@ -1,50 +1,40 @@
 import React from 'react';
-import { useLocalStorage } from './useLocalStorage';
+// import { useLocalStorage } from './useLocalStorage';
+import { useApi } from './useApi';
 
 const TodoContext = React.createContext();
 
 function TodoProvider({ children }) {
 
-    const { item, saveItem, loading, error } = useLocalStorage('TODOS_v1', []);
+    // antes
+    // const { item, saveItem, loading, error } = useLocalStorage('TODOS_v1', []);
+
+    // ahora
+    const { items, loading, error, addItem, completeItem, deleteItem } = useApi();
+
 
     const [searchValue, setSearchValue] = React.useState('');
-const [ openModal, setOpenModal ] = React.useState(false);
+    const [openModal, setOpenModal] = React.useState(false);
 
-    const completedTodos = item.filter(todo => !!todo.completed).length;
-    const totalTodos = item.length;
+    const completedTodos = items.filter(todo => todo.completed).length;
+    const totalTodos = items.length;
 
-    const searchedTodos = item.filter(todo => todo.text.toLowerCase()
-        .includes(
-            searchValue.toLowerCase()
-        )
-    ); // delegate lambda version like C#
-    // const searchedTodos = todos.filter( (todo) => { return todo.text.includes(searchValue) } ); //arrow function version
+    const searchedTodos = items.filter(todo =>
+        todo.task//.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
     const addTodo = (text) => {
-        const newTodos = [...item];
-        newTodos.push({
-            completed: false,
-            text
-        });
-        saveItem(newTodos);
-    }
-
-
-    const completeTodo = (text) => {
-        const newTodos = [...item];
-        const index = newTodos.findIndex((todo) => todo.text === text);
-        // newTodos.find(todo => todo.text === text).completed = true;
-        newTodos[index].completed = true;
-        saveItem(newTodos);
+        addItem(text);
     };
 
-    const deleteTodo = (text) => {
-        const newTodos = [...item];
-        const index = newTodos.findIndex((todo) => todo.text === text);
-        // newTodos.find(todo => todo.text === text).completed = true;
-        newTodos.splice(index, 1);
-        saveItem(newTodos);
+    const completeTodo = (id) => {
+        completeItem(id);
     };
+
+    const deleteTodo = (id) => {
+        deleteItem(id);
+    };
+
 
     return (
 
